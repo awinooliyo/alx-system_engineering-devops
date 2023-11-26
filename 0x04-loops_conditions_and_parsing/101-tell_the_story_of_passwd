@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script tells a story based on the contents of the `/etc/passwd` file
+#This script tells a story based on the contents of the `/etc/passwd` file
 myfile="/etc/passwd"
 f1=""
 f2=""
