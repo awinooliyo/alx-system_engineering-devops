@@ -26,12 +26,15 @@ Web Infrastructure Tasks
     ### Issues with this infrastructure
 
 - **SPOF (Single Point Of Failure).** <br />
-    Failure of the server causes whole network to collapse
-
+   Given that there is only one server, an issue or failure with the server would likely cause the entire website to be inaccessible.
 - **Downtime when maintenance needed.** <br />
-    When the system is not being productive due to required maintenance work (like deploying new code web server needs to be restarted).
+    When the system is not being productive due to required maintenance work (like deploying new code web server needs to be restarted). This might affect the accessibility of the website by the users.
 - **Cannot scale if too much incoming traffic.** <br />
+<<<<<<< HEAD
     It is unwieldy when it comes to scaling your site for higher loads.
+=======
+   In case the website experiences high traffic the single server might not handle the abrupt surge in traffic load. 
+>>>>>>> 304027d (Explanations for every task)
 
 ## 1. Distributed web infrastructure
 
