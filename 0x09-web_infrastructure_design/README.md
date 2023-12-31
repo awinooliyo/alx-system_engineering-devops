@@ -31,7 +31,7 @@ Web Infrastructure Tasks
 - **Downtime when maintenance needed.** <br />
     When the system is not being productive due to required maintenance work (like deploying new code web server needs to be restarted).
 - **Cannot scale if too much incoming traffic.** <br />
-    It is a bit unwieldy when it comes to scaling your site for higher loads.
+    It is unwieldy when it comes to scaling your site for higher loads.
 
 ## 1. Distributed web infrastructure
 
