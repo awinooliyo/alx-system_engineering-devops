@@ -1,0 +1,9 @@
+# SSH configuration file settings to connect to 
+# the_server without typing_any_password
+Host *
+    sendEnv LANG LC_*
+    HashKnownHosts yes
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials no
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
