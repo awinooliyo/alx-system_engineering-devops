@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Configuring the nginx web erver to have a custom 404 page that contains the string
+sudo apt-get update -y
+sudo apt-get -y install nginx
+echo "Hello World!" | sudo tee /var/www/html/index.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+sudo sed -i '/server_name _;/a \
+    error_page 404 /404.html;\n\
+    location = /404.html {\n\
+        internal;\n\
+    }' /etc/nginx/sites-available/default
+sudo service nginx start
