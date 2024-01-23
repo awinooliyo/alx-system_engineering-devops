@@ -14,4 +14,4 @@ sudo echo "Hello World!" | sudo tee /var/www/html/index.html
 # Check if installation is successful
 sudo nginx -t 
 # starting Nginx
-sudo service nginx restart
+sudo service nginx reload
