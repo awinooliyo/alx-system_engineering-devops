@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
-# A script containing commands to automatically configure a Ubuntu machine to respect above requirements
+# Configuring nginx server to have a 301 permament Redirect page
 
 sudo apt-get update
 sudo apt-get install -y nginx
 
-sudo ufw allow 'Nginx HTTP'
-
+# setting the default Index Page
 echo "Hello World!" | sudo tee /var/www/html/index.html
-sudo sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.digitalocean.com/ permanent;' /etc/nginx/sites-available/default
 
+# Redirecting a specific endpoint
+replacement_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com permanent;"
+sudo sed -i "s/server_name _;/$replacement_string/" /etc/nginx/sites-enabled/default
+
+# Restart Nginx
 sudo service nginx restart
