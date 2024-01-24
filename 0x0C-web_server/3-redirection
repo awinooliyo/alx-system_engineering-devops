@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# Configuring nginx server to have a 301 permanent Redirect page
+# Configuring nginx server to have a 301 permament Redirect page
 
-# Update and install Nginx
 sudo apt-get update
 sudo apt-get install -y nginx
 
-# Setting the default Index Page
+sudo ufw allow 'Nginx HTTP'
+
+# setting the default Index Page
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # Redirecting a specific endpoint
-replacement_string="server_name _;\n\trewrite ^/redirect_me https:\/\/www.youtube.com permanent;"
-sudo sed -i "s/server_name _;/$replacement_string/" /etc/nginx/sites-enabled/default
+sudo sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com permanent;/" /etc/nginx/sites-enabled/default
 
 # Restart Nginx
 sudo service nginx restart
