@@ -6,13 +6,8 @@ sudo apt-get install -y nginx
 
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
-REDIRECT_CONFIG="server_name _;\n\trewrite ^\/redirect_me https:\/\/youtube.com permanent;"
-
-# Nginx configuration file path (adjust as needed)
-NGINX_CONF_FILE="/etc/nginx/sites-enabled/default"
-
-# Use sed to perform the replacement
-sudo sed -i "s/server_name _;/$REDIRECT_CONFIG/" "$NGINX_CONF_FILE"
+# Define and apply the redirect configuration
+sudo sed -i '/server_name _;/c server_name _;\n\trewrite ^\/redirect_me https:\/\/youtube.com permanent;' /etc/nginx/sites-enabled/default
 
 # Reload nginx
 sudo service nginx restart
