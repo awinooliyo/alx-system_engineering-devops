@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 # Configuring Nginx server for 301 permanent redirect
 # Define the redirect configuration
 sudo apt-get update
