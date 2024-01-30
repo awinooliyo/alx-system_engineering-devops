@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Configuring nginx server to have a custom 404 page
+# containing the string
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Configure Firewall to allow request via port80
+sudo ufw allow "Nginx HTTP"
+
+# Setting the default Index page
+# echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Define and apply the redirect configuration
+sudo sed -i '/server_name _;/c server_name _;\n\trewrite ^\/redirect_me https:\/\/youtube.com permanent;' /etc/nginx/sites-enabled/default
+
+# Create a custom webpage for 404 error
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+# Configuring redirect 404 error page
+sed -i 's/server_name _;/server_name _;\n\trewrite \/redirect_me https:\/\/www.youtube.com\/watch\?v=QH2-TGUlwu4 permanent;\n\terror_page 404 \/404.html;\n\tlocation \/404.html{\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}/' /etc/nginx/sites-enabled/default
+
+# confirming correct syntax
+sudo nginx -t
+
+# Restart Nginx
+sudo service nginx restart
