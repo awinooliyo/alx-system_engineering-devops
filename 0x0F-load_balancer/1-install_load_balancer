@@ -24,7 +24,6 @@ frontend haproxy_balancer
 	mode http
 	default_backend webserver_backend
 backend webserver_backend
-	mode http
 	balance roundrobin
 	server 324857-web-01 34.234.203.177 check
 	server 324857-web-02 52.72.75.78 check
