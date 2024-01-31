@@ -11,35 +11,30 @@ sudo apt update && sudo apt upgrade -y
 sudo apt-get -y install software-properties-common
 
 # Install HAProxy via PPA
-sudo apt install --no-install-recommends software-properties-common
 sudo add-apt-repository ppa:vbernat/haproxy-2.4 -y
-
-# Install the latest HAProxy 2.4
-sudo apt install haproxy=2.4.\*
-
-# Update and Upgrade Packages
-sudo apt update && sudo apt upgrade -y
+sudo apt update
+sudo apt install --no-install-recommends haproxy=2.4.*
 
 # HAProxy Configuration
 balancer="
 frontend haproxy_balancer
     bind *:80
-	mode http
-	default_backend webserver_backend
+    mode http
+    default_backend webserver_backend
 backend webserver_backend
-	balance roundrobin
-	server 324857-web-01 34.234.203.177:80 check
-	server 324857-web-02 52.72.75.78:80 check
+    balance roundrobin
+    option http-server-close
+    server 324857-web-01 34.234.203.177:80 check
+    server 324857-web-02 52.72.75.78:80 check
 "
-echo "$balancer" | sudo tee /etc/haproxy/haproxy.cfg
+echo "$balancer" | sudo tee -a /etc/haproxy/haproxy.cfg
 
-# Enable HAProxy
+# Enable HAProxy (adjust for your distribution)
 echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
-
-# sudo chmod o+r /etc/haproxy/haproxy.cfg
 
 # Restart HAProxy service
 sudo service haproxy restart
 
 # Display status
-# sudo service haproxy status
+sudo service haproxy status
+
