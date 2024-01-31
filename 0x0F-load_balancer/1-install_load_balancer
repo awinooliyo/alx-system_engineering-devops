@@ -23,14 +23,14 @@ frontend haproxy_balancer
     default_backend webserver_backend
 backend webserver_backend
     balance roundrobin
-    option http-server-close
     server 324857-web-01 34.234.203.177:80 check
     server 324857-web-02 52.72.75.78:80 check
 "
 echo "$balancer" | sudo tee -a /etc/haproxy/haproxy.cfg
 
+sudo chmod o+r /etc/haproxy/haproxy.cfg
 # Enable HAProxy (adjust for your distribution)
-echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+# echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
 
 # Restart HAProxy service
 sudo service haproxy restart
