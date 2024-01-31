@@ -28,8 +28,8 @@ frontend haproxy_balancer
 	default_backend webserver_backend
 backend webserver_backend
 	balance roundrobin
-	server 324857-web-01 34.234.203.177 check
-	server 324857-web-02 52.72.75.78 check
+	server 324857-web-01 34.234.203.177:80 check
+	server 324857-web-02 52.72.75.78:80 check
 "
 echo "$balancer" | sudo tee /etc/haproxy/haproxy.cfg
 
