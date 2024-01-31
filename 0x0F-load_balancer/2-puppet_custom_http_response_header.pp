@@ -1,7 +1,7 @@
 # Update package information
 exec { 'apt-update':
   command => '/usr/bin/apt-get -y update',
-  path    => ['/usr/bin', '/bin],
+  path    => ['/usr/bin', '/bin'],
 }
 
 # Install Nginx Package
@@ -9,7 +9,7 @@ package { 'nginx':
   ensure => installed,
 }
 
-# Create a basic html file
+# Create a basic HTML file
 file { '/var/www/html/index.html':
   content => 'Hello World!',
 }
@@ -17,7 +17,7 @@ file { '/var/www/html/index.html':
 # Configure Nginx to add the custom HTTP header
 file_line { 'add custom header':
   ensure => present,
-  path   => '/etc/nginx/sites-avalable/default',
+  path   => '/etc/nginx/sites-available/default',
   line   => "\tadd_header X-Served-By ${hostname};",
   after  => 'server_name _;',
 }
