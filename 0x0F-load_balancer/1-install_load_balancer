@@ -4,18 +4,21 @@
 # HAProxy can be managed via init script
 # Install and configure HAProxy on my lb-01 server.
 
-# Update the package list
-sudo apt-get -y update
+# Update and upgrade the package list
+sudo apt update && sudo apt upgrade -y
 
 # Install Required Packages
 sudo apt-get -y install software-properties-common
 
-# Add the HAProxy repository
-sudo add-apt-repository -y ppa:vbernat/haproxy-2.0
+# Install HAProxy via PPA
+sudo apt install --no-install-recommends software-properties-common
+sudo add-apt-repository ppa:vbernat/haproxy-2.4 -y
 
-# Install HAProxy 2.4
-sudo apt-get -y update
-sudo apt-get install -y haproxy
+# Install the latest HAProxy 2.4
+sudo apt install haproxy=2.4.\*
+
+# Update and Upgrade Packages
+sudo apt update && sudo apt upgrade -y
 
 # HAProxy Configuration
 balancer="
@@ -32,6 +35,8 @@ echo "$balancer" | sudo tee /etc/haproxy/haproxy.cfg
 
 # Enable HAProxy
 echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+sudo chmod o+r /etc/haproxy/haproxy.cfg
 
 # Restart HAProxy service
 sudo service haproxy restart
