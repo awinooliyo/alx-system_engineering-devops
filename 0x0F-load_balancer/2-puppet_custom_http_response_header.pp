@@ -1,6 +1,6 @@
 # Update package information
 exec { 'apt-update':
-  command => '/usr/bin/apt-get -y uodate',
+  command => '/usr/bin/apt-get -y update',
   path    => ['/usr/bin', '/bin],
 }
 
