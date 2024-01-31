@@ -1,14 +1,8 @@
 #!/usr/bin/env bash
 # A script that installs and configures HAProxy on lb-01 server
-# Requests distributed via the Round Robin algorithm
-# HAProxy can be managed via init script
-# Install and configure HAProxy on my lb-01 server.
 
 # Update and upgrade the package list
 sudo apt update && sudo apt upgrade -y
-
-# Install Required Packages
-sudo apt-get -y install software-properties-common
 
 # Install HAProxy via PPA
 sudo add-apt-repository ppa:vbernat/haproxy-2.4 -y
@@ -16,7 +10,7 @@ sudo apt update
 sudo apt install --no-install-recommends haproxy=2.4.*
 
 # HAProxy Configuration
-balancer="\
+load_balancer_config="\
 frontend haproxy_balancer
     bind *:80
     mode http
@@ -27,15 +21,13 @@ backend webserver_backend
     server 324857-web-01 34.234.203.177:80 check
     server 324857-web-02 52.72.75.78:80 check
 "
-echo "$balancer" | sudo tee -a /etc/haproxy/haproxy.cfg
+echo "$load_balancer_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
+# Grant necessary Permissions
 sudo chmod o+r /etc/haproxy/haproxy.cfg
+
 # Enable HAProxy (adjust for your distribution)
 # echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
 
 # Restart HAProxy service
 sudo service haproxy restart
-
-# Display status
-sudo service haproxy status
-
