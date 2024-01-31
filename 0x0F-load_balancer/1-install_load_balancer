@@ -16,11 +16,12 @@ sudo apt update
 sudo apt install --no-install-recommends haproxy=2.4.*
 
 # HAProxy Configuration
-balancer="
+balancer="\
 frontend haproxy_balancer
     bind *:80
     mode http
     default_backend webserver_backend
+
 backend webserver_backend
     balance roundrobin
     server 324857-web-01 34.234.203.177:80 check
