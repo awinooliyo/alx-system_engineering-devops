@@ -8,9 +8,10 @@ sudo apt update && sudo apt upgrade -y
 sudo apt-get install -y haproxy
 sudo apt-get update
 
-# HAProxy Configuration
+# Edit Haproxy config file
 
-load_balancer_config="\
+load_balancer_config=
+"
 frontend haproxy_balancer
         bind *:80
         mode http
