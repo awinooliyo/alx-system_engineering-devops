@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Configures the server to listen to port 80
-
-ufw allow 'Nginx HTTP'
-sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
-sudo service nginx start
+# Solving the problem of server not listening to port 80
+# Delete the current current sites-available/default file and replacing it with its copy that's OK
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
