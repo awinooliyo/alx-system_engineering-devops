@@ -2,11 +2,11 @@
 # A script that installs and configures HAProxy on lb-01 server
 
 # Update and upgrade the package list
-sudo apt update && sudo apt upgrade -y
+sudo apt-get update && sudo apt-get upgrade -y
 
 # Install HAProxy
 # sudo add-apt-repository ppa:vbernat/haproxy -y
-sudo apt install haproxy
+sudo apt-get install haproxy
 # sudo apt update
 # sudo apt install --no-install-recommends haproxy
 
