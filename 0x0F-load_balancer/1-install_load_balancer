@@ -6,7 +6,6 @@ apt-get update && apt-get upgrade -y
 
 # Install HAProxy
 apt-get install -y haproxy
-sudo apt-get update
 
 # Edit Haproxy config file
 cp -a /etc/haproxy/haproxy.cfg{,.original_copy}
