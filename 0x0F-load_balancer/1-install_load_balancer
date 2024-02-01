@@ -2,10 +2,11 @@
 # A script that installs and configures HAProxy on lb-01 server
 
 # Update and upgrade the package list
-apt-get update && apt-get upgrade -y
+sudo apt update && sudo apt upgrade -y
 
 # Install HAProxy
-apt-get install -y haproxy
+sudo apt-get install -y haproxy
+sudo apt-get update
 
 # HAProxy Configuration
 load_balancer_config="\
@@ -14,12 +15,13 @@ frontend haproxy_balancer
         mode http
         default_backend webserver_backend
 backend webserver_backend
+		mode http
         balance roundrobin
         server 324857-web-01 34.234.203.177:80 check
         server 324857-web-02 52.72.75.78:80 check
 "
 
-echo "$load_balancer_config" | sudo tee /etc/haproxy/haproxy.cfg > /dev/null
+echo "$load_balancer_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
 # Enable HAProxy
 sudo sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
