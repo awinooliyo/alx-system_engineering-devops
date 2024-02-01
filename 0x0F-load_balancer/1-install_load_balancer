@@ -8,7 +8,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 # sudo add-apt-repository ppa:vbernat/haproxy -y
 sudo apt-get install haproxy
 # sudo apt update
-# sudo apt install --no-install-recommends haproxy
+sudo apt install --no-install-recommends haproxy
 
 # HAProxy Configuration
 load_balancer_config="\
