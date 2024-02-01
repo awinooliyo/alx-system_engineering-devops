@@ -2,10 +2,10 @@
 # A script that installs and configures HAProxy on lb-01 server
 
 # Update and upgrade the package list
-sudo apt-get update && sudo apt-get upgrade -y
+apt-get update && apt-get upgrade -y
 
 # Install HAProxy
-sudo apt-get install -y haproxy
+apt-get install -y haproxy
 
 # HAProxy Configuration
 load_balancer_config="\
