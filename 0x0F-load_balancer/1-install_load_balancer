@@ -5,10 +5,7 @@
 sudo apt-get update && sudo apt-get upgrade -y
 
 # Install HAProxy
-# sudo add-apt-repository ppa:vbernat/haproxy -y
-sudo apt-get install haproxy
-# sudo apt update
-sudo apt install --no-install-recommends haproxy
+sudo apt-get install -y haproxy
 
 # HAProxy Configuration
 load_balancer_config="\
@@ -21,13 +18,11 @@ backend webserver_backend
         server 324857-web-01 34.234.203.177:80 check
         server 324857-web-02 52.72.75.78:80 check
 "
-echo "$load_balancer_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
-# Grant necessary Permissions
-# sudo chmod o+r /etc/haproxy/haproxy.cfg
+echo "$load_balancer_config" | sudo tee /etc/haproxy/haproxy.cfg > /dev/null
 
-# Enable HAProxy (adjust for your distribution)
-echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+# Enable HAProxy
+sudo sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
 
 # Restart HAProxy service
-sudo service haproxy restart
+sudo systemctl restart haproxy
