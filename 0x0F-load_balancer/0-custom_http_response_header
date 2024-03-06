@@ -9,22 +9,24 @@ sudo apt-get install -y nginx
 sudo ufw allow "Nginx HTTP"
 
 # Setting the default Index page
-# echo "Hello World!" | sudo tee /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# Define and apply the redirect configuration
-sudo sed -i '/server_name _;/c server_name _;\n\trewrite ^\/redirect_me https:\/\/youtube.com permanent;' /etc/nginx/sites-enabled/default
+# Define and apply the redirect configuration (301 Redirection)
+replacement_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/youtube.com permanent;"
+sudo sed -i "s/server_name _;/$replacement_string/"  /etc/nginx/sites-enabled/default
 
 # Create a custom webpage for 404 error
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+replace_with_this="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
 
-# Configuring redirect 404 error page
-sed -i 's/server_name _;/server_name _;\n\trewrite \/redirect_me https:\/\/www.youtube.com\/watch\?v=QH2-TGUlwu4 permanent;\n\terror_page 404 \/404.html;\n\tlocation \/404.html{\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}/' /etc/nginx/sites-enabled/default
+sudo sed -i "s/listen 80 default_server;/$replace_with_this/" /etc/nginx/sites-enabled/default
 
-#Adding Custom Header 
+
+# Adding Custom Header
 sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
 
 # confirming correct syntax
 sudo nginx -t
 
-# Restart Nginx
+#Restart nginx after implementing changes
 sudo service nginx restart
