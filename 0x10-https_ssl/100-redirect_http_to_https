@@ -45,5 +45,5 @@ frontend erawin-frontend-https
 
 backend erawin-backend
     balance roundrobin
-    server 324857-web-01 34.234.203.177:80 check
-    server 324857-web-02 52.72.75.78:80 check
+    server 324857-web-01 18.215.160.180:80 check
+    server 324857-web-02 3.95.32.201:80 check
