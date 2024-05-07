@@ -4,12 +4,13 @@ Recursively querying the Reddit API
 """
 import requests
 
+
 def recurse(subreddit, hot_list=[]):
     """
     A function to recursively query the Reddit API to retrieve titles of
     all hort articles for a given subreddit.
 
-    Args: 
+    Args:
     subreddit: A string representing the namd of the subreddit.
     hot_list: A list to store the titles of the hot articles. Default is
               any empty list.
@@ -18,8 +19,7 @@ def recurse(subreddit, hot_list=[]):
     - A list with titles of all the hot articles for a given subreddit.
     - None, if no results are found.
     """
-
-    url: "https://www.reddit.com/r/{subreddit}/hot.json".format(subreddit)
+    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {
         "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
     }
