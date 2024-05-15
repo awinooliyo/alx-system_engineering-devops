@@ -1,0 +1,2 @@
+# 0x1A. Application server
+An application server is a network computer that hosts and runs applications for client computers. It acts as a container for a user's business logic, while also facilitating access to and performance of the business application. Application servers can also deliver web content, but their main purpose is to enable interaction between user clients and server-side application code.
