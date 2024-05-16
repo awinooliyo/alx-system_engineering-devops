@@ -20,7 +20,6 @@
 #
 server {
 	listen 80 default_server;
-	# listen [::]80 default_server;
 
 	location /airbnb-onepage/ {
 		proxy_pass http://localhost:5000;
@@ -59,8 +58,9 @@ server {
 	index index.html index.htm index.nginx-debian.html;
 
 	server_name _;
-	rewrite /redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+	rewrite ^/redirect_me https://www.youtube.com/ permanent;
 	error_page 404 /404.html;
+
 	location /404.html{
 		root /var/www/html;
 		internal;
